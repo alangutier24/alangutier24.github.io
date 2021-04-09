@@ -39,7 +39,9 @@ a.haus-img{
   width: 50%;
   padding-bottom: 5%
 }
-
+.card_media img{
+  width=inherit;
+}
 #search{
   position: absolute;
   top: 50%;
