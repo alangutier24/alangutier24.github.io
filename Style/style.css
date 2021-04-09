@@ -40,8 +40,7 @@ a.haus-img{
   padding-bottom: 5%
 }
 .card__media img{
-  width=270;
-  height=190;
+  width=100%;
 }
 #search{
   position: absolute;
