@@ -51,7 +51,10 @@ a.haus-img{
 
 li {
     display: inline;
-    padding: 5%;
+}
+
+li a{
+  padding: 5%;
 }
 
 ul {
