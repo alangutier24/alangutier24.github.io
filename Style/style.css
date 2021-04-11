@@ -67,7 +67,7 @@ ul {
   background-color: #f9f9f9;
   padding: 2%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1rem;
 }
 
@@ -78,18 +78,19 @@ ul {
 }
 
 .distrito {
+  margin: 0;
   font-family: 'Andika New Basic', sans-serif;
-
   font-family: 'Frank Ruhl Libre', serif;
-
   font-family: 'Open Sans', sans-serif;
 
 }
 .icon, .info {
+  margin 0;
   margin-left: auto;
   margin-right: auto;
 }
 .cash {
+  margin 0;
   font-family: 'Andika New Basic', sans-serif;
   font-family: 'Frank Ruhl Libre', serif;
   font-family: 'Open Sans', sans-serif;
@@ -119,7 +120,6 @@ p {
 .card {
   --flow-space: 1rem;
   background: #ffffff;
-  border-radius: 1em;
   overflow: hidden;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /*box-shadow: 0 0 20px hsl(0 0% 0% / 10%);*/
