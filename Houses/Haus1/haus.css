@@ -31,7 +31,10 @@ a:hover{
 
 li {
     display: inline;
-    padding: 5%;
+}
+
+li a {
+  padding: 5%;
 }
 
 ul {
