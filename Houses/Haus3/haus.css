@@ -64,6 +64,11 @@ ul {
   display: none;
 }
 
+.mySlides img{
+  object-fit: scale-down;
+  height: 700px;
+}
+
 /* Add a pointer when hovering over the thumbnail images */
 .cursor {
   cursor: pointer;
