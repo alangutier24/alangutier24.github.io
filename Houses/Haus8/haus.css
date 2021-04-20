@@ -74,6 +74,15 @@ ul {
   cursor: pointer;
 }
 
+.row{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.row img {
+  width: 182px;
+}
+
 /* Next & previous buttons */
 .prev,
 .next {
