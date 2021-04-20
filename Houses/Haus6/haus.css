@@ -59,6 +59,15 @@ ul {
   position: relative;
 }
 
+.row{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.row img {
+  width: 182px;
+}
+
 /* Hide the images by default */
 .mySlides {
   display: none;
