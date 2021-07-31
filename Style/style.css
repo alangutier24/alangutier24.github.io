@@ -65,7 +65,7 @@ ul {
   padding-top: 4%;
 }
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 720px){
   .haus-display{
     display: flex;
     flex-direction: column;
