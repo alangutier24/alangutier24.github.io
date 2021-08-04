@@ -1,346 +1,259 @@
 <!DOCTYPE html>
-<html>
 
-  <head>
-      <title>InHaus</title>
-      <link rel="stylesheet" href="Style/style.css"/>
-      <link rel="shortcut icon" type="image" href="Logo/inhaus.ico" />
-  </head>
+<meta charset="UTF-8">
 
-  <body>
+<head>
+  <link rel="stylesheet" href="Style/style.css"/>
+</head>
 
-    <header>
-      <nav class="main-nav">
-        <img id="logo" src="Logo/inhaus.png" alt="logo" width="180px" height="90px">
-        <ul "main-menu">
-            <li class="menu-item"><a href="main.html">Haus</a></li>
-            <li class="menu-item"><a href="About/about.html">About</a></li>
-            <li class="menu-item"><a href="#foot">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+<header>
+  <nav class="main-nav">
+    <p id="logo">InHaus <span id="highlight">.</span></p>
+    <ul "main-menu">
+        <li class="menu-item"><a href="index.html">Haus</a></li>
+        <li class="menu-item"><a href="About/about.html">About</a></li>
+        <li class="menu-item"><a href="#foot">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <div class="welcome">
-      <script>
 
-          var images = [];
-          var time = 3000;
-          var num = 4;
-          var img = 0
+<body>
 
-          for (var i = 0; i < num; i++ ){
-            images[i] = "Valencia/valencia" + i.toString() + ".jpg";
-          }
+  <div class="welcome">
+    <div class="image-stack">
+      <div class="background"><img src="Valencia/greenhouse.jpg" alt="Costa de Valencia"></div>
+      <div class="top"><img src="Logo/inhaus.png" alt="Logo"></div>
+  </div>
+  </div>
 
-          function changeImg(){
-            document.slide.src = images[img]
+  <div class="haus-display">
 
-            if(img < images.length - 1){
-              img++;
-            }
-            else{
-              img = 0;
-            }
-
-            setTimeout("changeImg()", time);
-          }
-
-          window.onload = changeImg;
-      </script>
-      <img name="slide" width=700 height=300>
-    </div>
-
-    <div class="haus-display">
-      <div class="row1">
-      <!-- Haus1 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus1/haus.html"><img src="Houses/Haus1/picture2.jpg" /></a>
+    <!-- Haus1 -->
+    <div class="card">
+      <div class="card__media">
+        <a href="Houses/Haus1/haus.html"><img src="Houses/Haus1/picture0.jpg" /></a>
+      </div>
+      <div style="text-align:center;" class="[ card__content ] [ flow ]">
+        <h3 class='distrito'>Angel Guimera</h3>
+        <h2 class="cash"> 700€</h2>
+        <div class="haus-info">
+          <!-- Sihlouette  -->
+          <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+          <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+          <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+          <!-- dormitorios -->
+          <p class="info"> 4 </p>
+          <!-- banos -->
+          <p class="info"> 1 </p>
+          <p class="info"> 90m2 </p>
         </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'>Angel Guimera</h3>
-          <h2 class="cash"> 700€</h2>
-          <div class="haus-info">
-            <!-- Sihlouette  -->
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 4 </p>
-            <!-- banos -->
-            <p class="info"> 1 </p>
-            <p class="info"> 90m2 </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus1/haus.html" class="button" target="_blank">Más información</a>
-
+        <hr></hr>
+        <a href="Houses/Haus1/haus.html" class="button" target="_blank">Más información</a>
       </div>
     </div>
-      <!-- Haus2 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus2/haus.html"><img src="Houses/Haus2/picture0.JPG" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Primado Reig </h3>
-          <h2 class='cash'>800€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 4 </p>
-            <!-- banos -->
-            <p class="info"> 1 </p>
-            <p class="info"> 120m2 </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus2/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
+    <!-- Haus2 -->
+    <div class="card">
+     <div class="card__media">
+       <a href="Houses/Haus2/haus.html"><img src="Houses/Haus2/picture0.JPG" /></a>
+     </div>
+     <div style="text-align:center;" class="[ card__content ] [ flow ]">
+       <h3 class='distrito'> Primado Reig </h3>
+       <h2 class='cash'>800€</h2>
+       <div class="haus-info">
+         <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+         <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+         <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+         <!-- dormitorios -->
+         <p class="info"> 4 </p>
+         <!-- banos -->
+         <p class="info"> 1 </p>
+         <p class="info"> 120m2 </p>
+       </div>
+       <hr></hr>
+       <a href="Houses/Haus2/haus.html" class="button" target="_blank">Más información</a>
 
-      <!-- Haus3 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus3/haus.html"><img src="Houses/Haus3/picture0.jpg" /></a>
+
+     </div>
+   </div>
+    <!-- Haus3 -->
+    <div class="card">
+    <div class="card__media">
+        <a href="Houses/Haus3/haus.html"><img src="Houses/Haus3/picture0.jpg" /></a>
+      </div>
+      <div style="text-align:center;" class="[ card__content ] [ flow ]">
+        <h3 class='distrito'> General San Martín </h3>
+        <h2 class='cash'>1100€</h2>
+        <div class="haus-info">
+          <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+          <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+          <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+          <!-- dormitorios -->
+          <p class="info"> 4 </p>
+          <!-- banos -->
+          <p class="info"> 2 </p>
+          <p class="info"> 150m² </p>
         </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> General San Martín </h3>
-          <h2 class='cash'>1100€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 4 </p>
-            <!-- banos -->
-            <p class="info"> 2 </p>
-            <p class="info"> 150m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus3/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-  
-        <!-- Haus13 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus13/haus.html"><img src="Houses/Haus13/picture0.jpg" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Cuenca Tramoyeres </h3>
-          <h2 class='cash'>1100€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 4 </p>
-            <!-- banos -->
-            <p class="info"> 1 </p>
-            <p class="info"> 119m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus13/haus.html" class="button" target="_blank">Más información</a>
-      </div>
+        <hr></hr>
+        <a href="Houses/Haus3/haus.html" class="button" target="_blank">Más información</a>
       </div>
     </div>
-
-
-    <div class="row2">
-      <!-- Haus4 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus4/haus.html"><img src="Houses/Haus4/picture0.jpg" /></a>
+    <!-- Haus4 -->
+    <div class="card">
+      <div class="card__media">
+        <a href="Houses/Haus4/haus.html"><img src="Houses/Haus4/picture0.jpg" /></a>
+      </div>
+      <div style="text-align:center;" class="[ card__content ] [ flow ]">
+        <h3 class='distrito'> Antonio Ponz  </h3>
+        <h2 class='cash'>700€</h2>
+        <div class="haus-info">
+          <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+          <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+          <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+          <!-- dormitorios -->
+          <p class="info"> 3 </p>
+          <!-- banos -->
+          <p class="info"> 1 </p>
+          <p class="info"> 70m² </p>
         </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Antonio Ponz  </h3>
-          <h2 class='cash'>700€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 3 </p>
-            <!-- banos -->
-            <p class="info"> 1 </p>
-            <p class="info"> 70m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus4/haus.html" class="button" target="_blank">Más información</a>
+        <hr></hr>
+        <a href="Houses/Haus4/haus.html" class="button" target="_blank">Más información</a>
       </div>
-      </div>
-
-      <!-- Haus5 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus5/haus.html"><img src="Houses/Haus5/picture0.jpg" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Cardenal Benlloch </h3>
-          <h2 class='cash'>800€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 3 </p>
-            <!-- baños -->
-            <p class="info"> 1 </p>
-            <p class="info"> 96m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus5/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-
-      <!-- Haus10 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus12/haus.html"><img src="Houses/Haus12/picture5.jpg" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Torreta de Miramar </h3>
-          <h2 class='cash'>700€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 3 </p>
-            <!-- baños -->
-            <p class="info"> 1 </p>
-            <p class="info"> 90m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus12/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-
     </div>
-
-
-    <div class="row3">
-      <!-- Haus6 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus6/haus.html"><img src="Houses/Haus6/picture0.jpeg" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Ciutat Vella </h3>
-          <h2 class='cash'>500€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 2 </p>
-            <!-- baños -->
-            <p class="info"> 1 </p>
-            <p class="info"> -m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus6/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-
-      <!-- Haus7 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus7/haus.html"><img src="Houses/Haus7/picture4.jpg" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Calle de Cuba </h3>
-          <h2 class='cash'>850€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 4 </p>
-            <!-- baños -->
-            <p class="info"> 2 </p>
-            <p class="info"> 150m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus7/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-
-      <!-- Haus10 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus10/haus.html"><img src="Houses/Haus10/picture13.jpg" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Carde Barraca </h3>
-          <h2 class='cash'>820€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 3 </p>
-            <!-- baños -->
-            <p class="info"> 1 </p>
-            <p class="info"> 95m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus10/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-
-    </div>
-
-    <div class="row4">
-      <!-- Haus8 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus8/haus.html"><img src="Houses/Haus8/picture0.jpg" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> Calle Uruguai | Venta </h3>
-          <h2 class='cash'>310,000€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 3 </p>
-            <!-- baños -->
-            <p class="info"> 2 </p>
-            <p class="info"> 75m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus8/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-
-      <!-- Haus9 -->
-      <div class="card">
-        <div class="card__media">
-          <a href="Houses/Haus8/haus.html"><img src="Houses/Haus9/picture0.JPG" /></a>
-        </div>
-        <div style="text-align:center;" class="[ card__content ] [ flow ]">
-          <h3 class='distrito'> El Mercat </h3>
-          <h2 class='cash'>600€</h2>
-          <div class="haus-info">
-            <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
-            <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
-            <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
-            <!-- dormitorios -->
-            <p class="info"> 2 </p>
-            <!-- baños -->
-            <p class="info"> 1 </p>
-            <p class="info"> 50m² </p>
-          </div>
-          <hr></hr>
-          <a href="Houses/Haus9/haus.html" class="button" target="_blank">Más información</a>
-      </div>
-      </div>
-
-      <!-- Haus11 -->
-      <div class="card">
+    <!-- Haus5 -->
+    <div class="card">
+       <div class="card__media">
+         <a href="Houses/Haus5/haus.html"><img src="Houses/Haus5/picture0.jpg" /></a>
+       </div>
+       <div style="text-align:center;" class="[ card__content ] [ flow ]">
+         <h3 class='distrito'> Cardenal Benlloch </h3>
+         <h2 class='cash'>800€</h2>
+         <div class="haus-info">
+           <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+           <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+           <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+           <!-- dormitorios -->
+           <p class="info"> 3 </p>
+           <!-- baños -->
+           <p class="info"> 1 </p>
+           <p class="info"> 96m² </p>
+         </div>
+         <hr></hr>
+         <a href="Houses/Haus5/haus.html" class="button" target="_blank">Más información</a>
+       </div>
+     </div>
+    <!-- Haus6 -->
+    <div class="card">
+       <div class="card__media">
+         <a href="Houses/Haus6/haus.html"><img src="Houses/Haus6/picture0.jpeg" /></a>
+       </div>
+       <div style="text-align:center;" class="[ card__content ] [ flow ]">
+         <h3 class='distrito'> Ciutat Vella </h3>
+         <h2 class='cash'>500€</h2>
+         <div class="haus-info">
+           <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+           <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+           <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+           <!-- dormitorios -->
+           <p class="info"> 2 </p>
+           <!-- baños -->
+           <p class="info"> 1 </p>
+           <p class="info"> -m² </p>
+         </div>
+         <hr></hr>
+         <a href="Houses/Haus6/haus.html" class="button" target="_blank">Más información</a>
+       </div>
+     </div>
+    <!-- Haus7 -->
+    <div class="card">
+       <div class="card__media">
+         <a href="Houses/Haus7/haus.html"><img src="Houses/Haus7/picture4.jpg" /></a>
+       </div>
+       <div style="text-align:center;" class="[ card__content ] [ flow ]">
+         <h3 class='distrito'> Calle de Cuba </h3>
+         <h2 class='cash'>850€</h2>
+         <div class="haus-info">
+           <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+           <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+           <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+           <!-- dormitorios -->
+           <p class="info"> 4 </p>
+           <!-- baños -->
+           <p class="info"> 2 </p>
+           <p class="info"> 150m² </p>
+         </div>
+         <hr></hr>
+         <a href="Houses/Haus7/haus.html" class="button" target="_blank">Más información</a>
+       </div>
+     </div>
+    <!-- Haus8 -->
+    <div class="card">
+         <div class="card__media">
+           <a href="Houses/Haus8/haus.html"><img src="Houses/Haus8/picture0.jpg" /></a>
+         </div>
+         <div style="text-align:center;" class="[ card__content ] [ flow ]">
+           <h3 class='distrito'> Calle Uruguai | Venta </h3>
+           <h2 class='cash'>310,000€</h2>
+           <div class="haus-info">
+             <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+             <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+             <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+             <!-- dormitorios -->
+             <p class="info"> 3 </p>
+             <!-- baños -->
+             <p class="info"> 2 </p>
+             <p class="info"> 75m² </p>
+           </div>
+           <hr></hr>
+           <a href="Houses/Haus8/haus.html" class="button" target="_blank">Más información</a>
+       </div>
+     </div>
+    <!-- Haus9 -->
+    <div class="card">
+         <div class="card__media">
+           <a href="Houses/Haus8/haus.html"><img src="Houses/Haus9/picture0.JPG" /></a>
+         </div>
+         <div style="text-align:center;" class="[ card__content ] [ flow ]">
+           <h3 class='distrito'> El Mercat </h3>
+           <h2 class='cash'>600€</h2>
+           <div class="haus-info">
+             <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+             <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+             <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+             <!-- dormitorios -->
+             <p class="info"> 2 </p>
+             <!-- baños -->
+             <p class="info"> 1 </p>
+             <p class="info"> 50m² </p>
+           </div>
+           <hr></hr>
+           <a href="Houses/Haus9/haus.html" class="button" target="_blank">Más información</a>
+       </div>
+     </div>
+    <!-- Haus10 -->
+    <div class="card">
+         <div class="card__media">
+           <a href="Houses/Haus10/haus.html"><img src="Houses/Haus10/picture13.jpg" /></a>
+         </div>
+         <div style="text-align:center;" class="[ card__content ] [ flow ]">
+           <h3 class='distrito'> Carde Barraca </h3>
+           <h2 class='cash'>820€</h2>
+           <div class="haus-info">
+             <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+             <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+             <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+             <!-- dormitorios -->
+             <p class="info"> 3 </p>
+             <!-- baños -->
+             <p class="info"> 1 </p>
+             <p class="info"> 95m² </p>
+           </div>
+           <hr></hr>
+           <a href="Houses/Haus10/haus.html" class="button" target="_blank">Más información</a>
+       </div>
+     </div>
+    <!-- Haus11 -->
+    <div class="card">
         <div class="card__media">
           <a href="Houses/Haus11/haus.html"><img src="Houses/Haus11/picture0.jpg" /></a>
         </div>
@@ -360,13 +273,34 @@
           <hr></hr>
           <a href="Houses/Haus11/haus.html" class="button" target="_blank">Más información</a>
       </div>
+    </div>
+    <!-- Haus12 -->
+    <div class="card">
+      <div class="card__media">
+        <a href="Houses/Haus12/haus.html"><img src="Houses/Haus12/picture0.jpg" /></a>
+      </div>
+      <div style="text-align:center;" class="[ card__content ] [ flow ]">
+        <h3 class='distrito'> Cuenca Tramoyeres </h3>
+        <h2 class='cash'>1100€</h2>
+        <div class="haus-info">
+          <img class="icon" src="Silhouette/bedroom.png" width=50 height=50>
+          <img class="icon" src="Silhouette/bathroom.png" width=60 height=30>
+          <img class="icon" src="Silhouette/ruler.png" width=50 height=50>
+          <!-- dormitorios -->
+          <p class="info"> 4 </p>
+          <!-- banos -->
+          <p class="info"> 1 </p>
+          <p class="info"> 119m² </p>
+        </div>
+        <hr></hr>
+        <a href="Houses/Haus12/haus.html" class="button" target="_blank">Más información</a>
       </div>
     </div>
 
   </div>
-    <div id='foot' class='footer'>
-      <p class='contact'>mangus966@gmail.com</p>
-      <p class='contact'>678 26 65 87</p>
-    </div>
 
-  </body>
+  <div id='foot' class='footer'>
+    <p class='contact'>mangus966@gmail.com</p>
+    <p class='contact'>678 26 65 87</p>
+  </div>
+</body>
