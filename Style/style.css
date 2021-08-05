@@ -15,7 +15,9 @@ header {
   overflow-x: hidden;
 }
 .main-nav{
-  display:flex;
+  display: flex;
+  column-gap: 75%;
+
 }
 #logo {
   padding: 1%;
@@ -28,11 +30,12 @@ header {
 #highlight {
   color: #e83f43;
 }
-ul {
+ul{
   padding: 1%;
-  margin-left: 77%;
+  /*margin-left: 77%;*/
   display: flex;
   direction: row;
+  grid-template: main-menu;
 }
 li{
   display: inline;
@@ -53,16 +56,16 @@ a:hover{
 }
 .image-stack {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 .background {
   margin-top: 3%;
+  overflow: hidden;
   grid-column-start: 1;
   grid-column-end: 12;
   grid-row-start: 1;
   grid-row-end: 4;
-  overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -112,7 +115,6 @@ a:hover{
   width: 70%;
   padding-left: 25%;
   animation-timing-function: linear;
-  animation-delay: 3s;
   animation: fadeInLeft 0.8s 0.4s ease ;
 }
 .top{
@@ -280,3 +282,4 @@ hr {
   margin-left: auto;
   margin-right: auto;
 }
+
