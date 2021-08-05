@@ -17,7 +17,6 @@ header {
 .main-nav{
   display:flex;
 }
-
 #logo {
   padding: 1%;
   color: #232323;
@@ -31,7 +30,7 @@ header {
 }
 ul {
   padding: 1%;
-  margin-left: 80%;
+  margin-left: 77%;
   display: flex;
   direction: row;
 }
@@ -65,20 +64,78 @@ a:hover{
   grid-row-end: 4;
   overflow: hidden;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 .background img {
   width: 70%;
   padding-left: 25%;
+  animation-timing-function: linear;
+  animation-delay: 3s;
+  animation: fadeInLeft 0.8s 0.4s ease ;
 }
 .top{
   padding: 3%;
+  /*background-color: #7794ab;*/
   background-color: white;
   grid-row: 3;
   grid-column-start: 3;
   grid-column-end: 5;
-  z-index: 1; // tells the browser to make this image on top
+  z-index: 1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 .top img{
   width: 100%;
+  animation: fadeInLeft 0.8s 0.4s ease;
+}
+.ascesores{
+  text-align: center;
+  font-family: 'Barlow', sans-serif;
+  font-size: 3.25rem;
+  grid-column-start: 4;
+  grid-column-end: 9;
 }
 .haus-display {
   background-color: #f9f9f9;
