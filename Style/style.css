@@ -245,8 +245,12 @@ hr {
     aspect-ratio: 1/1;
     flex-basis: 30%;
     flex-shrink: 0;
+    }
+  @-webkit{
+    .card__media img{
+      overflow: hidden;
+    }
   }
-
   .card__media img {
     border-radius: 0.5em;
   }
