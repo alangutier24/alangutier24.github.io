@@ -18,6 +18,18 @@ header {
   display: flex;
   column-gap: 75%;
 }
+@media screen and (max-width: 1200px){
+  .main-nav{
+    display: flex;
+    column-gap: 60%;
+  }
+}
+@media screen and (max-width: 600px){
+  .main-nav{
+    display: flex;
+    column-gap: 30%;
+  }
+}
 #logo {
   padding: 1%;
   color: #232323;
