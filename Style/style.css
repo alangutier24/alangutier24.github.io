@@ -1,8 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,500,700');
-@-webkit-viewport{
-    width: extend-to-zoom;
-    zoom: 1.0;
-}
 html, body{
   margin: 0;
   padding: 0;
