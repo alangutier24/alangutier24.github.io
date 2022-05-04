@@ -1,0 +1,363 @@
+*{
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Stars.svg?sanitize=true);
+  background-color: #191E25;
+  font-family: 'Raleway', sans-serif;
+}
+
+/*MENU*/
+.nav{
+  text-align: right;
+  height: 70px;
+  line-height: 70px;
+  position: relative;
+}
+
+.menu{
+  margin: 0 30px 0 0;
+}
+
+.menu a{
+  clear: right;
+  text-decoration: none;
+  color: #FEFFFF;
+  margin: 0 10px;
+  line-height: 70px;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+  transition: all 250ms ease;
+}
+
+a:not(#home):hover{
+  background: rgba(0, 0, 0, .8);
+  padding: 1%;
+  border-radius: .20em;
+}
+
+.photo{
+  width: auto;
+  height: 100vh;
+  position: relative;
+  background: url("../imgs/kratos_atreus_boat.png") center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.right .overlay {
+  position: relative;
+  bottom: 0;
+  left: 100%;
+  right: 0;
+  background-color: rgba(0, 0, 0, .7);
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.right:hover .overlay {
+  width: 100%;
+  left: 0;
+}
+.left .overlay {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .7);
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.left:hover .overlay {
+  width: 100%;
+}
+
+.where{
+  font-family:'Rakkas';
+  color:#DBAB4C;
+  text-align: center;
+  font-size:2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.about{
+  font-family:'Rakkas';
+  text-align: left;
+  color: white;
+  font-size:1.2em;
+}
+
+#alfheim{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Alfheim_map.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#alfheim_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Alfheim.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+
+}
+
+
+#asgard{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Asgard_door.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#asgard_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Asgard.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+#helheim{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Helheim_map.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#helheim_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Helheim.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+#jotunheim{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Jotunheim_door.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#jotunheim_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Jotunheim.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+#midgard{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Midgard_map.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#midgard_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Midgard.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+#muspelheim{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Muspelheim_map.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#muspelheim_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Muspelheim.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+#niflheim{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Niflheim_door.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#niflheim_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Niflheim.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+#svartalfheim{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Svartalfheim_door.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#svartalfheim_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Svartalfheim.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+#vanaheim{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Vanaheim_door.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 1%;
+}
+
+#vanaheim_banner{
+  width: auto;
+  height: 50vh;
+  position: relative;
+  background: url("../imgs/Vanaheim.png") center;
+  background-size: cover;
+  overflow: hidden;
+  margin: 2%;
+}
+
+[class*="col-"] {
+  float: left;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+footer{
+  background-color: #1a252f;
+  text-align: center;
+  margin: 0;
+  color: white;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+
+.footer_content{
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c3e50;
+  color: #fff;
+}
+.footer_column{
+  width: 33.33%;
+}
+#cv{
+  color: white;
+}
+
+#cv:hover{
+  color: #15967d;
+}
+
+@media only screen and (max-width: 900px) {
+  /* For mobile phones: */
+  [class*="col-4"] {
+    width: 100%;
+  }
+  /* For mobile phones: */
+  [class*="col-8"] {
+    width: 100%;
+  }
+  .footer_content{
+    display: block;
+    height: 45vh;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  /* For mobile phones: */
+  [class*="col-4"] {
+    width: 33.33%;
+  }
+  [class*="col-8"] {
+    width: 66.66%;
+  }
+}
