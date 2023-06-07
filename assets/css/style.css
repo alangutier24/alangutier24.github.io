@@ -59,9 +59,21 @@ label {
 	border: 1px solid #ccc;
 	border-radius: 0px;
 }
-.navbar-inverse .navbar-brand img {
+.navbar-inverse .navbar-brand video {
 	/* width: 171px; */
+	display: block;
+		margin-left: auto;
+		margin-right: auto;
 }
+
+video
+{
+	display: block;
+		margin-left: 5%;
+		margin-right: auto;
+		width: 20%;
+}
+
 .section-title {
 	margin-bottom: 20px;
 }
