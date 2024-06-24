@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Shadows</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Shadows</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+       It provides a new perspective to scenes. 
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+        BeginRenderShadow(u32 light_id, LightType light_type);
+
+        RenderShadow(const byte *root_node, Math::Mat4 father_mat = Math::Mat4::Identity());
+        
+        RenderShadow(Entity::Id root_node, Math::Mat4 father_mat = Math::Mat4::Identity());
+
+        EndRenderShadow();
+        </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Configuration
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        Shadows require no configuration as they are added and managed internaly.
+        The user can simply decide to add them or not.  
+      </div>
+      
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To add the shadows we go to the update function and make sure to call the render method on each 
+        object that we want to cast shadows. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+            for (u32 i = 0; i < max_spot_lights; i++)
+            {
+              JAM_Engine::BeginRenderShadow(i, LightType::SpotLight);
+              for (u32 j = 0; j < 6; j++)
+              {
+                std::string name = std::string("Surface_") + std::to_string(j);
+                JAM_Engine::RenderShadow(name.c_str());
+              }
+          
+              for (u32 j = 0; j < 7; j++)
+              {
+                std::string name = std::string("Sphere_") + std::to_string(j);
+                JAM_Engine::RenderShadow(name.c_str());
+              }
+              JAM_Engine::EndRenderShadow();
+            }
+		</code>
+      </pre>
+      <div class="explanation">
+        Then we can add the shadows through shaders just like the lights. 
+        <br>
+        It is important to note that the sampler2DArray variables for the shadow maps of each type of light 
+        are added into every shader and need not be manually added by the user. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+        uniform sampler2DArray u_spot_shadow_maps;
+        uniform sampler2DArray u_point_shadow_maps;
+        uniform sampler2DArray u_directional_shadow_maps;
+
+        void main(){
+
+            ...
+
+            final_color += GetShadowFactor(spot_light_[i], u_spot_shadow_maps, i, world_position.xyz) * light_value; 
+
+            ...
+            
+            fragColor =  vec4(final_color, 1.0);
+        }
+
+        </code>
+    </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

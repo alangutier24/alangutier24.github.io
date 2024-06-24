@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Volumetric Lighting</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Volumetric Lighting</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+       It provides a new perspective to scenes.
+       <br>
+       Used through light configuration
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+        vec3 GetVolumetricLight(SpotLight s_light, sampler2DArray shadow_map, uint layer_index, vec3 pixel_pos, float attenuation, float max_distance, float step_offset);
+        
+        vec3 GetVolumetricLight(PointLight p_light, sampler2DArray shadow_map, uint layer_index, vec3 pixel_pos, float attenuation, float max_distance, float step_offset);
+        
+        vec3 GetVolumetricLight(DirectionalLight d_light, sampler2DArray shadow_map, uint layer_index, vec3 pixel_pos, float attenuation, float max_distance, float step_offset);
+        </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        Each light has the capacity to cast volumetric lighting. To activate it you must do so individually.
+      </div>
+      <pre>
+        <code class="language-cpp">
+        point_light.use_volumetric_ = true;
+		</code>
+      </pre>
+      <div class="explanation">
+        It is meanr to be used in a shader. Added to the final color. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+        final_color += GetShadowFactor(point_light_[i], u_point_shadow_maps, i, world_position.xyz)
+        </code>
+    </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

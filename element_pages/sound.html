@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Sound</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Sound</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+       It allows us to play sound in the engine. 
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+          Source::Id uploadSound(const byte *src, f32 pitch, f32 gain, f32 position[3], f32 velocity[3], boolean loop = false);
+
+          s32 getState(Source::Id sound);
+
+          void setGain(Source::Id sound, f32 gain);
+          f32 getGain(Source::Id sound);
+
+          void setPitch(Source::Id sound, f32 pitch);
+          f32 getPitch(Source::Id sound);
+
+          void setPosition(Source::Id sound, f32 position[3]);
+          void getPosition(Source::Id sound, f32 ret_position[3]);
+
+          void setVelocity(Source::Id sound, f32 velocity[3]);
+          void getVelocity(Source::Id sound, f32 ret_velocity[3]);
+
+          void setLoop(Source::Id sound, boolean loop);
+          boolean getLoop(Source::Id sound);
+
+          void play(Source::Id sound);
+          void pause(Source::Id sound);
+          void stop(Source::Id sound);
+          void rewind(Source::Id sound);
+
+        </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Configuration
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        Sound Core is configured to be used anywhere in the project.
+      </div>
+      <pre>
+        <code class="language-cpp">
+    #define SC (SoundCore::Instance())
+		    </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To add a sound you must provide the path to the sound and add it to the engine. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+    Source::Id source = SC->uploadSound((byte *)MUSIC("Militar.wav"), 1.0f, 1.0f, pos, vel, true);
+ 
+    SC->play(layers[i].source);
+ 
+         </code>
+      </pre>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

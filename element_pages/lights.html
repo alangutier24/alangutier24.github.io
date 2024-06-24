@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Lights</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Lights</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+       It allows us to iluminate a scene by creating a source of light. 
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+        PointLight::Id AddLight(PointLight light);
+        PointLight *GetPointLight(PointLight::Id index);
+    
+        SpotLight::Id AddLight(SpotLight light);
+        SpotLight *GetSpotLight(SpotLight::Id index);
+
+        DirectionalLight::Id AddLight(DirectionalLight light);
+        DirectionalLight *GetDirectionalLight(DirectionalLight::Id index);
+
+        </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Configuration
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        Each light is configured accoding to learn opengl. 
+        There are 3 total types of lights. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+        enum class LightType : s16
+        {
+            SpotLight,        ///< Spot light type.
+            PointLight,       ///< Point light type.
+            DirectionalLight, ///< Directional light type.
+        };
+        struct PointLight
+        {
+            Math::Vec3 position_; ///< Position of the point light.
+            f32 bright_;          ///< Brightness of the point light.
+            
+            Math::Vec3 difuse_clr_;   ///< Diffuse color of the point light.
+            f32 specular_str_;        ///< Specular strength of the point light.
+            f32 specular_bright_;     ///< Specular brightness of the point light.
+            
+            f32 quadratic_attenuation_; ///< Quadratic attenuation of the point light.
+            f32 constant_attenuation_;  ///< Constant attenuation of the point light.
+            f32 linear_attenuation_;    ///< Linear attenuation of the point light.
+            f32 empty_ = 0.0f;          ///< Empty variable to align the structure in memory.
+        }
+        class SpotLight
+        {
+            void setPosAndDir(Math::Vec3 pos, Math::Vec3 dir);
+
+            f32 bright_; ///< Brightness of the spot light.
+
+            f32 cut_off_; ///< Cutoff angle of the spot light.
+
+            Math::Vec3 difuse_clr_;   ///< Diffuse color of the spot light.
+            f32 specular_str_;        ///< Specular strength of the spot light.
+            f32 specular_bright_;     ///< Specular brightness of the spot light.
+
+            f32 linear_attenuation_;    ///< Linear attenuation of the spot light.
+            f32 constant_attenuation_;  ///< Constant attenuation of the spot light.
+            f32 quadratic_attenuation_; ///< Quadratic attenuation of the spot light.
+            f32 outter_cut_off_;        ///< Outer cutoff angle of the spot light.
+        }  
+        class DirectionalLight
+        {
+            void setDirection(Math::Vec3 pos, Math::Vec3 dir);
+
+            f32 bright_; ///< Brightness of the directional light.
+
+            f32 specular_bright_;     ///< Specular brightness of the spot light.
+            Math::Vec3 difuse_clr_;   ///< Diffuse color of the spot light.
+            f32 specular_str_;        ///< Specular strength of the spot light.
+            f32 empty_ = 0.0f;        ///< Empty variable to align the structure in memory.
+        }        
+		</code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To add a light first you must provide its parameters. Then set a position and direction
+        and finally you can add it to the engine. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+        Math::Vec3 light_positions[] = { Math::Vec3(10.0f, 0.0f, 0.0f), ... };
+        
+        Math::Vec3 light_directions[] = { Math::Vec3(-1.0f, 0.0f, 0.0f), ... };
+        
+        Math::Vec3 light_colors[] = { Math::Vec3(0.0f, 0.5f, 0.4f), ...};
+
+        SpotLight spotLight;
+
+        spotLight.bright_ = 1.0f;
+        spotLight.cut_off_ = 0.5f;
+        spotLight.specular_str_ = 0.5f;
+        spotLight.specular_bright_ = 32.0f;
+        spotLight.linear_attenuation_ = 0.25f;
+        spotLight.constant_attenuation_ = 0.1f;
+        spotLight.quadratic_attenuation_ = 0.0f;
+        spotLight.outter_cut_off_ = 1.0f;
+        
+        for (u32 i = 0; i < max_spot_lights; i++)
+        {
+            spotLight.setPosAndDir(light_positions[i], light_directions[i]);
+            spotLight.difuse_clr_ = light_colors[i];
+            JAM_Engine::AddLight(spotLight);
+        }
+			  </code>
+      </pre>
+      <div class="explanation">
+        Once added in the project you can add the Lights
+        through shaders as the lights structures have been passed through a buffer.
+        All that needs to be done is add the light to the final color. 
+        <br>
+        The array spot_light_ is one of the arrays added to every shader where the passed
+        parameters for each light lives in. 
+        <br>
+        It is important to note that lights are aditive. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+        void main(){
+
+            vec4 world_position = texture(u_location_img, vertex_data.tex_coord);
+            vec4 world_normal = texture(u_normal_img, vertex_data.tex_coord);
+            
+            final_color += GetLight(spot_light_[i], world_position.xyz, world_normal.xyz, true);
+            
+            ...
+            
+            fragColor =  vec4(final_color, 1.0);
+        }
+
+        </code>
+    </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

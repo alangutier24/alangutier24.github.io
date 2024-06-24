@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Window</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Window</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This class is not a class created to be used like that. Is made to use with the engine.
+        <br>
+        To use this class you are going to use the next engine functions like configurations.
+      </div>
+      <pre style="height: auto">
+        <code class="language-cpp">
+class JAM_Engine
+{
+  struct Config
+  {
+    s32 argc_ = 0;
+    byte **argv_ = nullptr;
+
+    s32 width_ = 0, height_ = 0;
+    boolean fullscreen_ = false;
+    boolean make_resizable_ = false;
+
+    boolean end_escape_key_ = true;
+
+    ShadowsManager::Resolution point_res_ = ShadowsManager::Resolution::Low;
+    ShadowsManager::Resolution spot_res_ = ShadowsManager::Resolution::Low;
+    ShadowsManager::Resolution directional_res_ = ShadowsManager::Resolution::Medium;
+  };
+  
+  static void Init(void (*user_init)(s32 argc, byte *argv[], 
+                                     void *user_struct), Config config, 
+                                     void *user_struct = nullptr);
+                                     
+  static Math::Vec2 WindowSize();
+  static Math::Vec2 MousePosition();
+  static Math::Vec2 WheelScroll();
+
+  static boolean InputDown(Inputs::Key key);
+  static boolean InputPress(Inputs::Key key);
+
+  static boolean InputDown(Inputs::MouseButton button);
+  static boolean InputPress(Inputs::MouseButton button);
+
+  static f32 DeltaTime();
+  static void SetDesiredFPS(f32 fps);
+  static void SetFPSControl(boolean fps_control);
+
+  static const byte *LastDroppedFilePath();
+
+  static void AddError(std::string error = "\0", 
+                       std::string function = "\0", 
+                       std::string line = "\0");
+};
+			  </code>
+      </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

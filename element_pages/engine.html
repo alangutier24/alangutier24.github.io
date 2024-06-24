@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>JAM Engine</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">JAM Engine</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        <p>Welcome to the world of our custom graphics engine, a powerful and versatile tool
+        designed to leverage the capabilities of OpenGL for creating stunning visual experiences.
+        <p>This engine is the culmination of extensive research and development, aimed at providing developers</p>
+        with a robust framework for building high-performance graphics applications, from games to simulations and beyond.
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+        
+        void JAM_Engine::Init(void (*user_init)(s32 argc, byte *argv[], void *user_struct), Config config, void *user_struct);
+        void JAM_Engine::Update(void (*user_update)(void *user_struct), void *user_struct);
+        void JAM_Engine::BeginRender(Camera *cam);
+        void JAM_Engine::Render(const byte *node, Math::Mat4 father_mat);
+        void JAM_Engine::EndRender();
+        
+        Mesh::Id JAM_Engine::UploadMesh(const byte *path, boolean center, Texture::Wrap* wrapS, Texture::Wrap* wrapT, Texture::Filter* minF, Texture::Filter* magF);
+        Texture::Id JAM_Engine::UploadTexture(const byte *path, Texture::Wrap wrapS, Texture::Wrap wrapT, Texture::Filter minF, Texture::Filter magF);
+        
+        boolean JAM_Engine::InputPress(Inputs::Key key);
+        boolean JAM_Engine::InputDown(Inputs::Key key);
+        boolean JAM_Engine::InputPress(Inputs::MouseButton button);
+        boolean JAM_Engine::InputDown(Inputs::MouseButton button);
+        
+        void JAM_Engine::SetDesiredFPS(f32 fps);
+        void JAM_Engine::SetFPSControl(boolean fps_control);
+        
+      </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Configuration
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        The use of the engine requires a very basic set of functions in order to open a window. 
+      </div>
+      <pre>
+        <code class="language-cpp">
+        static f32 win_x = 16 * 75;
+        static f32 win_y = 9 * 75;
+        
+        void UserInit(s32 argc, byte *argv[], void *)
+        {
+          PRINT_ARGS
+        }
+        
+        void UserUpdate(void *) {}
+        void UserClean(void *) {}
+        
+        s32 main(s32 argc, byte *argv[])
+        {
+          JAM_Engine::Config config = {
+            argc, argv,
+            static_cast<s32>(win_x),
+            static_cast<s32>(win_y),
+            false, true, true,
+            ShadowsManager::Resolution::Low,
+            ShadowsManager::Resolution::Low,
+            ShadowsManager::Resolution::Low };
+          JAM_Engine::Init(UserInit, config);
+          JAM_Engine::Update(UserUpdate);
+          JAM_Engine::Clean(UserClean);
+        
+          return 0;
+        }
+		</code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To make a basic triangle the set up would look something like this.
+        It requires a camera which requires a set-up, a mesh to be displayed, and the set-up of the mesh as an entity with its components.
+      </div>
+      <pre>
+        <code class="language-cpp">
+        static f32 win_x = 16 * 75;
+        static f32 win_y = 9 * 75;
+        
+        static const Camera::CamConfig config = {
+          .camera_render_type_ = Camera::RenderType::Orthographic,
+          .light_render_type_ = Camera::LightRenderType::Forward,
+          .cam_win_ = Math::Vec2(win_x, win_y),
+          .pos_ = Math::Vec3(0.0f, 0.0f, 1.0f),
+          .target_ = Math::Vec3::zero,
+          .GetMesh = &JAM_Engine::GetMesh,
+          .UploadMesh = &JAM_Engine::UploadCustomMesh,
+          .WheelScroll = &JAM_Engine::WheelScroll,
+          .MousePosition = &JAM_Engine::MousePosition,
+          .KeyInputPress = &JAM_Engine::InputPress,
+          .MouseInputPress = &JAM_Engine::InputPress };
+        
+        static Camera camera;
+        
+        static Mesh* triangle = nullptr;
+        
+        void UserInit(s32 argc, byte* argv[], void*)
+        {
+          PRINT_ARGS;
+          camera.init(config);
+        
+          triangle = JAM_Engine::GetMesh(Mesh::Platonic::k_Triangle);
+        
+          Transform tr;
+        
+          tr.rotate(Math::Vec3(Math::MathUtils::AngleToRads(90.0f), 0.0f, 0.0f));
+        
+          EM->newEntity("Triangle");
+          EM->setComponent(EM->getId("Triangle"), triangle);
+          EM->setComponent(EM->getId("Triangle"), tr);
+          EM->setComponent(EM->getId("Triangle"), DrawConfig());
+        }
+        
+        void UserUpdate(void*)
+        {
+          JAM_Engine::BeginRender(&camera);
+          JAM_Engine::Render(EM->getId("Triangle"));
+          JAM_Engine::EndRender();
+        }
+        
+        void UserClean(void *) {}
+        
+        s32 main(s32 argc, byte* argv[])
+        {
+          JAM_Engine::Config config = {
+            argc, argv,
+            static_cast<s32>(win_x),
+            static_cast<s32>(win_y),
+            false, true, true,
+            ShadowsManager::Resolution::Low,
+            ShadowsManager::Resolution::Low,
+            ShadowsManager::Resolution::Low };
+          JAM_Engine::Init(UserInit, config);
+          JAM_Engine::Update(UserUpdate);
+          JAM_Engine::Clean(UserClean);
+          return 0;
+        }
+			  </code>
+      </pre>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

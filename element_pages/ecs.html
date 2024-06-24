@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>ECS</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">ECS</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This module is used to have a multiple types of entities organized.
+        <br>
+        Allow us to have fast acces to entities and its components.
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Class
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        We can acces to a entity with the EntityManager (EM).
+      </div>
+      <pre>
+        <code class="language-cpp">
+#define EM (EntityManager::Instance())
+
+class EntityManager : private Entity::ComponentsManager
+{
+public:
+  void clear();
+  Entity::Id newEntity(const char *name = nullptr);
+  Entity::Id newEntity(const char *name, Transform tr, Mesh *mesh, DrawConfig dr_config, Shader *mat = nullptr);
+  void removeEntity(Entity::Id entity_id);
+  
+  void setChild(Entity::Id father, Entity::Id child);
+
+  template &lt;typename T&gt;
+  void addComponent();
+
+  template &lt;typename T&gt;
+  void setComponent(Entity::Id entity_id, const T &component);
+  template &lt;typename T&gt;
+  T *getComponent(Entity::Id entity_id);
+  template &lt;typename T&gt;
+  T *getComponentsList();
+  
+  std::string getName(Entity::Id entity_id) const;
+  Entity::Id getId(const std::string name) const;
+
+private:
+  EntityManager();
+  ~EntityManager();
+  boolean cleared_;    ///< Flag to know if is necessary to clean or not.
+  Entity::Id invalid_; ///< Invalid entity identifier.
+  
+  Entity::Id external_counter_; ///< External counter to assign unique identifiers to entities.
+  
+  std::vector<std::pair<Entity::Id, size_t>> ids_map_; ///< Mapping between external and internal identifiers.
+  
+  std::vector<std::pair<std::string, Entity::Id>> names_map_; ///< Mapping between entity names and external identifiers.
+  
+  size_t maps_size_; ///< Size of the maps container.
+};
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        The entity have preestablished components that define a entity in opur engine.
+        <br>
+        The components are: Mesh*, Shader*, Transform, TreeNode, DrawConfig.
+        <br>
+        This components are complete neccesary to render it in scene thrwo the engine.
+      </div>
+      <pre>
+        <code class="language-cpp">
+userInit()
+{
+  EM->addComponent&lt;Class/Struct&gt;();
+  Entity::Id entity = EM->newEntity("Name");
+  EM->setComponent(entity, component);
+
+  // Maybe want to remove a entity
+  EM->removeEntity(entity_id);
+}
+
+userUpdate()
+{
+  // Entity usage
+
+  // Entity render in scene (Need a camera)
+  JAM_Engine::BeginRender(&camera);
+
+  JAM_Engine::Render(entity_id);
+  // or
+  JAM_Engine::Render(entity_name);
+
+  JAM_Engine::EndRender();
+}
+
+main()
+{
+  JAM_Engine::Init(UserInit, config);
+  JAM_Engine::Update(UserUpdate);
+  JAM_Engine::Clean(UserClean);
+}
+			  </code>
+      </pre>
+      <div class="explanation">
+        Apart from render we can modify the components (But not change after setted)
+      </div>
+    <pre>
+      <code class="language-cpp">
+userInit()
+{
+  EM->addComponent&lt;Class/Struct&gt;();
+  Entity::Id entity = EM->newEntity("Name");
+  EM->setComponent(entity, component);
+}
+
+userUpdate()
+{
+  TreeNode *node = EM->getComponent&lt;Transform&gt;();
+  Shader *shader = *EM->getComponent&lt;Shader*&gt;();
+}
+
+main()
+{
+  JAM_Engine::Init(UserInit, config);
+  JAM_Engine::Update(UserUpdate);
+  JAM_Engine::Clean(UserClean);
+}
+      </code>
+    </pre>
+    <!---->
+    <div class="explanation">
+      Also can insert childs but not remove after inserted. We have a max that can change in TreeNode class.
+    </div>
+  <pre>
+    <code class="language-cpp">
+userInit()
+{
+  Entity::Id father = EM->newEntity("Name");
+  Entity::Id child = EM->newEntity("Name");
+  EM->setChild(father, child);
+}
+
+userUpdate()
+{
+}
+
+main()
+{
+  JAM_Engine::Init(UserInit, config);
+  JAM_Engine::Update(UserUpdate);
+  JAM_Engine::Clean(UserClean);
+}
+    </code>
+  </pre>
+  <!---->
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

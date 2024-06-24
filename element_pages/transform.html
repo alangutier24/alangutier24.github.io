@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Transform</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Transform</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Class
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This class allow us to have one mesh loaded with multiple draw instances
+      </div>
+      <pre>
+        <code class="language-cpp">
+class Transform
+{
+public:
+  Transform();
+  ~Transform();
+  Math::Mat4 getTrMatrix();
+  
+  void rotate(Math::Vec3 radians);
+  Math::Vec3 getRotate() const;
+  Math::Mat4 getRotateMat() const;
+  
+  void scale(Math::Vec3 size);
+  Math::Vec3 getScale() const;
+  Math::Mat4 getScaleMat() const;
+  
+  void translate(Math::Vec3 move);
+  Math::Vec3 getTranslate() const;
+  Math::Mat4 getTranslateMat() const;
+  void orbit(Math::Vec3 orbit);
+  
+  Math::Vec3 getOrbit() const;
+  Math::Mat4 getOrbitMat() const;
+  void orbitCenter(Math::Vec3 orbit_center);
+  Math::Vec3 getOrbitCenter() const;
+  
+private:
+  Math::Mat4 matrix_[4]; ///< Array of 4x4 transformation matrices for rotation, scaling, translation, and orbiting.
+          
+  Math::Vec3 translate_;    ///< Translation amounts along the x, y, and z axes.
+  Math::Vec3 rotate_;       ///< Rotation angles in radians around the x, y, and z axes.
+  Math::Vec3 scalate_;      ///< Scaling factors along the x, y, and z axes.
+  Math::Vec3 orbit_;        ///< Orbiting angles in radians around the x, y, and z axes.
+  Math::Vec3 orbit_center_; ///< Center point for orbiting.
+};
+          
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To use this class is extremely simple, we only need to declare it.
+        <br>
+        The rest of the functions are used to set transforms. Internally are making matrix multiplications.
+        When you call rotate, scale, translate or orbit it adds to the previous one.
+        <br>
+        Need to have carefull with the scale. It starts on 0.
+        <br>
+        The transform is used with ECS and the Engine, for more usage info go to tutorials.
+      </div>
+      <pre>
+        <code class="language-cpp">
+Transform tr;
+
+userInit()
+{
+  tr.scale(Math::Vec3(1.0f));
+  // Now scale is Vec3(1.0f, 1.0f, 1.0f);
+  
+  tr.scale(Math::Vec3(0.0f, 0.0f, 1.0f));
+  // Now scale is Vec3(1.0f, 1.0f, 2.0f);
+
+  // And so on with rotate, translate & orbit
+
+  // More code
+}
+
+userUpdate()
+{
+  // Transform use
+}
+
+main()
+{
+  JAM_Engine::Init(UserInit, config);
+  JAM_Engine::Update(UserUpdate);
+  JAM_Engine::Clean(UserClean);
+}
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Timer</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Timer</section>
+  <div id="container">
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This element provides a class to take times in some many units
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Units
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="own-code language-cpp">
+  enum class Precision
+  {
+    minutes = 0,
+    seconds,
+    milliseconds,
+    microseconds,
+    nanoseconds,
+    picoseconds
+  };
+        </code>
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        Like a timer, this element can start, stop, continue &amp; see time.
+      </div>
+      <pre>
+        <code class="language-cpp">
+  class TimeCont
+  {
+    void startTime();
+    void continueTime();
+    void stopTime();
+
+    size_t getElapsedTime(Precision precision);
+    static inline void Delay(s32 milliseconds);
+  }
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Example
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To use the timer is easy. You need to start the timer, if you call stopTime the time stops &amp; you can call
+        continueTime to keep it
+      </div>
+      <pre>
+        <code class="language-cpp">
+  void main() 
+  {
+	  TimeCont timer;
+
+    timer.startTime();
+    TimeCont::Delay(16); // In milliseconds -> 16 ms
+    timer.stopTime();
+    timer.printElapsedTime(TimeCont::Precision::milliseconds);
+    // The console may print Time: 16ms
+
+    TimeCont::Delay(20);
+    timer.printElapsedTime(TimeCont::Precision::milliseconds);
+    // The console may print Time: 16ms
+
+    timer.continueTime();
+    TimeCont::Delay(16);
+    timer.printElapsedTime(TimeCont::Precision::milliseconds);
+    // The console may print Time: 32ms
+  }
+			  </code>
+      </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

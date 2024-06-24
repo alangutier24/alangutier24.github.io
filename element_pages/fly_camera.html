@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Fly Camera</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Fly Camera</section>
+  <div id="container">
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This element provides functionality for working with cameras,
+        including configuration and related operations.
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+  Camera();
+  void init(CamConfig config);
+  ~Camera();
+
+  void control(const f32 dt);
+
+  RenderType getRenderType() const;
+  LightRenderType getLightRenderType() const;
+
+  void setWinPos(Math::Vec2 win_pos);
+  Math::Vec2 winPos() const;
+  Math::Vec2 winSize() const;
+  void setWinSize(Math::Vec2 size);
+
+  Math::Mat4 getPerspectiveMatrix() const;
+  Math::Mat4 getOrtoMatrix() const;
+  Math::Mat4 getViewMatrix() const;
+
+  Math::Vec3 getPosition() const;
+  void setPosition(Math::Vec3 pos);
+  Math::Vec3 getDirection() const;
+  void setTarget(Math::Vec3 target);
+
+  void setMatPostProcess(Material *mat);
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Configuration
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To use the camera, you need to set the viewport. Its window position,
+        the size, and the world position. Its frustrum or cube view and the
+        pointers to the corresponding function of the engine.
+      </div>
+      <pre>
+        <code class="language-cpp">
+  struct CamConfig
+  {
+    RenderType camera_render_type_;
+    LightRenderType light_render_type_;
+
+    Math::Vec2 cam_win_;
+    Math::Vec3 pos_;
+    Math::Vec3 target_;
+
+    f32 near_ = 1.0f;
+    f32 far_ = 1000.0f;
+
+    f32 right_ = 10.0f;
+    f32 left_ = -10.0f;
+    f32 top_ = 10.0f;
+    f32 bottom_ = -10.0f;
+
+    f32 fovy_ = Math::MathUtils::AngleToRads(60.0f);
+
+    Mesh* (*GetMesh)(Mesh::Id);
+    Mesh::Id (*UploadMesh)(CustomMesh *(*load_mesh_callback)());
+
+    Math::Vec2 (*WheelScroll)();
+    Math::Vec2 (*MousePosition)();
+    boolean (*KeyInputPress)(Inputs::Key);
+    boolean (*MouseInputPress)(Inputs::MouseButton);
+  };
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To use the camera you need to call to the constructor, then, call
+        the init in user init or at least between JAM_Engine::init and
+        JAM_Engine::update, finally, call to controll funciton in user update
+        if you want to controll it.
+      </div>
+      <pre>
+        <code class="language-cpp">
+  Camera camera;
+
+  userInit()
+  {
+    camera.init();
+    // More code
+  }
+
+  userUpdate()
+  {
+    camera.controll();
+    // More code
+  }
+
+  main()
+  {
+    JAM_Engine::Init(UserInit, config);
+    JAM_Engine::Update(UserUpdate);
+    JAM_Engine::Clean(UserClean);
+  }
+			  </code>
+      </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>OBJ Meshes</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">OBJ Meshes</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+       It allows us to load any obj file and display it inside the world with mtl files.
+       <br>
+       The class has acces to the vertices list, index list and size of both.
+      </div>
+    </div>
+    <div id="container-title">
+      Class
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        Vertex
+      </div>
+      <pre>
+        <code class="language-cpp">
+struct Vertex
+{
+  Math::Vec3 position_;  ///< 3D position of the vertex.
+  Math::Vec3 normal_;    ///< Normal vector of the vertex.
+  Math::Vec2 texCoords_; ///< Texture coordinates of the vertex.
+};
+        </code>
+      </pre>
+      <div class="explanation">
+        Vertex material
+      </div>
+      <pre>
+        <code class="language-cpp">
+struct VertexMaterial
+{
+  Math::Vec3 ambient_ = 0.0f;     ///< Ambient color of the material.
+  u32 ambient_index = UINT32_MAX; ///< Ambient texture index.
+          
+  Math::Vec3 diffuse_ = 0.0f;     ///< Diffuse color of the material.
+  u32 diffuse_index = UINT32_MAX; ///< Diffuse texture index.
+          
+  Math::Vec3 specular_ = 0.0f;     ///< Specular color of the material.
+  u32 specular_index = UINT32_MAX; ///< Specular texture index.
+          
+  Math::Vec3 transmittance_ = 0.0f;          ///< Transmittance color of the material.
+  u32 specular_highlight_index = UINT32_MAX; ///< Specular highlight texture index.
+          
+  Math::Vec3 emission_ = 0.0f;     ///< Emission color of the material.
+  u32 emissive_index = UINT32_MAX; ///< Emissive texture index.
+          
+  f32 shininess_ = 0.0f; ///< Shininess of the material.
+  f32 ior_ = 0.0f;       ///< Index of refraction of the material.
+  f32 dissolve_ = 0.0f;  ///< Dissolve factor of the material.
+  s32 illum_ = 0;        ///< Illumination model of the material.
+          
+  u32 bump_index = UINT32_MAX;         ///< Bump texture index.
+  u32 displacement_index = UINT32_MAX; ///< Displacement texture index.
+  u32 alpha_index = UINT32_MAX;        ///< Alpha texture index.
+  u32 reflection_index = UINT32_MAX;   ///< Reflection texture index.
+          
+  u32 roughness_index = UINT32_MAX; ///< Roughness texture index.
+  u32 metallic_index = UINT32_MAX;  ///< Metallic texture index.
+  u32 sheen_index = UINT32_MAX;     ///< Sheen texture index.
+  u32 normal_index = UINT32_MAX;    ///< Normal texture index.
+};
+        </code>
+      </pre>
+      <div class="explanation">
+        Mesh: The engine ensure the correct use of this class
+      </div>
+      <pre>
+        <code class="language-cpp">
+class Mesh
+{
+friend class JAM_Engine; ///< Friend class.
+          
+public:
+  Mesh();
+  ~Mesh();
+  void free();
+            
+  void render(DrawConfig dr_config) const;
+  boolean hasMesh() const;
+           
+  void loadMesh(const std::string &filePath, boolean normalize, Texture::Wrap *wrapS = nullptr, Texture::Wrap *wrapT = nullptr, Texture::Filter *minF = nullptr, Texture::Filter *magF = nullptr);
+  void loadCustomMesh(CustomMesh *(*load_mesh_callback)());
+            
+  void bindMaterialTextures(Shader *shader, u32 texture_unit);
+            
+  const Vertex getVertice(const size_t index) const;
+  const u32 verticesSize() const;
+
+private:
+  mutable u32 VAO, VBO, EBO, SSBO;    ///< Vertex Array Object (VAO), Vertex Buffer Object (VBO) and Elements Buffer Object (EBO) for rendering.
+  boolean has_mesh_;                  ///< Flag indicating whether the mesh has been loaded.
+  u32 *indices_;                      ///< Array of indices
+  u32 indices_size_;                  ///< Sizeo of array indices
+  u32 vertices_size_;                 ///< Size of the vertices array.
+  Vertex *vertices_;                  ///< Array of vertices representing the mesh.
+  VertexMaterial *vertices_material_; ///< Array of vertices representing the mesh.
+          
+  Texture::Wrap wrapS_[13];                                ///< Array of wrap modes for the S coordinate of textures.
+  Texture::Wrap wrapT_[13];                                ///< Array of wrap modes for the T coordinate of textures.
+  Texture::Filter minF_[13];                               ///< Array of minification filters for textures.
+  Texture::Filter magF_[13];                               ///< Array of magnification filters for textures.
+  mutable u32 texture_ids_[13];                            ///< Array of texture IDs.
+  std::unordered_map<std::string, u32> textures_path_[13]; ///< Array of maps associating texture paths with texture IDs.
+            
+  void loadBuffers() const;
+  void loadTextureBuffers() const;
+  void centerAndNormalize(Math::Vec3 min, Math::Vec3 max);
+};
+        </code>
+      </pre>
+      <div class="explanation">
+        Engine functions
+      </div>
+      <pre>
+        <code class="language-cpp">
+static Mesh::Id UploadMesh(const byte *path, boolean center, Texture::Wrap *wrapS = nullptr, Texture::Wrap *wrapT = nullptr, Texture::Filter *minF = nullptr, Texture::Filter *magF = nullptr);
+static Mesh::Id UploadCustomMesh(CustomMesh *(*load_mesh_callback)());
+
+static Mesh *GetMesh(Mesh::Id index);
+static Mesh *GetMesh(Mesh::Platonic form);          
+        </code>
+      </pre>
+  </div>
+      <!---->
+      <div id="container-title">
+        Usage
+        <hr>
+      </div>
+      <div class="subcontainer">
+        <div class="explanation">
+          To use this class with the engine you need to call the constructor and afteter engine init or userInit call mesh.loadX(...), only can call once.
+          <br>
+          Then the class is ready to use.
+          <br>
+          Also the class is safe to init in a diferent thread.
+          <br>
+          The mesh is controlled by ECS and Engine, for more usage info go to Tutorials.
+        </div>
+        <pre>
+          <code class="language-cpp">
+            Mesh *mesh;
+
+            userInit()
+            {
+              mesh = JAM_Engine::GetMesh(JAM_Engine::UploadMesh(path_to_file, normalize));
+              // More code
+            }
+          
+            userUpdate()
+            {
+              // Mesh use
+            }
+          
+            main()
+            {
+              JAM_Engine::Init(UserInit, config);
+              JAM_Engine::Update(UserUpdate);
+              JAM_Engine::Clean(UserClean);
+            }
+          </code>
+        </pre>
+      </div>
+      <!---->
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

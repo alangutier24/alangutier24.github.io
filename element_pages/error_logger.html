@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Error Logger</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Error Logger</section>
+  <div id="container">
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This element provides a class to save or check for engine errors.
+        <br>
+        Also you can use for your things.
+        <br>
+        It's a simple queue, you add error or get &amp; delete de last inserted by a predefined structure.
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Error struct
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+  class ErrorLog
+  {
+    class Error
+    {
+    public:
+      class string function_;
+      class string error_;
+      class string line_;
+
+      Error();
+      Error(const Error &other);
+      Error(const std::string error, const std::string function = "\0", const std::string line = "\0");
+
+      ~Error();
+
+      Error &operator=(const Error &other);
+    };
+  }
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+  class ErrorLog
+  {
+    ErrorLog();
+    ~ErrorLog();
+
+    void addError(class string error = "\0", 
+                class string function = "\0", 
+                class string line = "\0");
+    struct Error getError();
+  }
+
+  class JAM_Engine
+  {
+    static void AddError(class string error = "\0", 
+                         class string function = "\0", 
+                         class string line = "\0");
+    static struct Error GetError();
+  }
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Example
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To use the error logger you only need to call the engine functions to add or get it.
+      </div>
+      <pre>
+        <code class="language-cpp">
+  #include &lt;jam_engine.h&gt;
+  void main() 
+  {
+    JAM_Engine::AddError("error", __FUNCTION__, "72");
+    struct Error error = JAM_Engine::GetError();
+
+    printf(stdout, "Error: %s, Function: %s, Line: %s", error.name, error.function, error.line);
+    // May print: Error: error, Function: main, Line: 72
+  }
+			  </code>
+      </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

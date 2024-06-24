@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Textures</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Textures</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        It allows us to load any type of image like a texture.
+        <br>
+        This texture can be used like a sampler2D.
+        <br>
+        Also there are a TexturesArray class that works exactly the same but for arrays.
+        <br>
+        This textures array can be used like a sampler2DArray.
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="language-cpp">
+  Texture(Wrap wrapS, Wrap wrapT, Filter minFilter, Filter magFilters);
+  ~Texture();
+  void free();
+        
+  boolean hasTexture() const;
+  void loadTexture(const std::string &filePath);
+
+  u32 id();
+  u_byte *data() const;
+
+  s32 width() const;
+  s32 height() const;
+  s32 channels() const;
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Configuration
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This is a fixed configuration so... Think it well.
+      </div>
+      <pre>
+        <code class="language-cpp">
+  enum class Wrap : s16
+  {
+    Repeat = 0,      ///&lt; Repeat texture coordinates.
+    Mirrored_Repeat, ///&lt; Repeat with mirroring.
+    Clamp_To_Edge,   ///&lt; Clamp to the edge.
+    Clamp_To_Border  ///&lt; Clamp to the border.
+  };
+        
+  enum class Filter
+  {
+    Linear = 0,            ///&lt; Linear interpolation.
+    Nearest,               ///&lt; Nearest-neighbor interpolation.
+    Linear_Mipmap_Linear,  ///&lt; Linear interpolation with mipmapping.
+    Linear_Mipmap_Nearest, ///&lt; Linear interpolation with nearest-neighbor mipmapping.
+    Nearest_Mipmap_Nearest ///&lt; Nearest-neighbor interpolation with nearest-neighbor mipmapping.
+  };
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Usage
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To gen a texture you need to call the constructor (with configuration), then call to loadTexture (Is multithread
+        safe), and to use it call the id or data.
+        <br>
+        The id returned is to use when the engine ask for texture_id like in material.
+        <br>
+        The data is a pixel array (Use it carrefully)
+      </div>
+      <pre>
+        <code class="language-cpp">
+  Texture text(Wrap::Repeat, Wrap::Repeat, Filter::Linear, Filter::Linear);
+
+  userInit()
+  {
+    text.loadTexture("path_to_file/file");
+    // More code
+  }
+        
+  userUpdate()
+  {
+    u32 text_id = text.id();
+    // More code
+  }
+   
+  main()
+  {
+    Engine::init(userInit);
+    Engine::init(userUpdate);
+  }
+			  </code>
+      </pre>
+      <div class="explanation">
+        If you don't want to manage the texture, is better to do it throw the engine.
+        <br>
+        The use is similar but to acces it you only need to save the Texture::Id returned. This id is used only in
+        JAM_Engine::GetTexture function.
+      </div>
+      <pre>
+        <code class="language-cpp">
+  static Texture::Id UploadTexture(const byte *path,
+                                   Texture::Wrap wrapS, Texture::Wrap wrapT,
+                                   Texture::Filter minF, Texture::Filter magF);
+
+  static Texture *GetTexture(u32 index);
+        </code>
+      </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

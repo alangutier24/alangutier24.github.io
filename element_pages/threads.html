@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Task manager</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Task manager</section>
+  <div id="container">
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        This element provides a class to execute functions on a separated thread simultaneously.
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <pre>
+        <code class="own-code language-cpp">
+          class TaskManager
+          {
+            static class TaskManager *Instance();
+
+            TaskManager(s32 numThreads = (class thread::hardware_concurrency() / 2));
+            ~TaskManager();
+
+            template &lt;typename Function, typename... Args&gt;
+            decltype(auto) enqueue(Function &&func, Args &&...args)
+          };
+        </code>
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Example
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        To use you need to generate a future&lt;type&gt; and send the function &amp; arguments to enqueue.
+        <br>
+        If you return a value the main thread will wait until the enqueued function ends.
+        <br>
+        So is recommended to use non return functions or class functions.
+        <br>
+        <div style="color:rgb(255, 61, 61)">Please make sure that you have your function and information save from multithread.</div>
+      </div>
+      <pre>
+        <code class="language-cpp">
+        static int counter = 0;
+
+        class Foo
+        {
+          float foo_counter = 0.0f;
+          float Add(float num)
+          {
+            foo_counter += num;
+            return foo_counter;
+          }
+        }
+
+        int Poo(int num)
+        {
+          counter += num;
+          return counter;
+        }
+
+        void main() 
+        {
+          class future&lt;int&gt; i_future = TM->enqueue(&Poo, 3);
+          fprintf(stdout, "Counter: %d", i_future.get());
+
+          Foo foo;
+          class future&lt;float&gt; f_future = TM->enqueue(&Foo::Add, foo, 1.7f);
+          fprintf(stdout, "Counter: %d", f_future.get());
+        }
+			</code>
+    </pre>
+    </div>
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>

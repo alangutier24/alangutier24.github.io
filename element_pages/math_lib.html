@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" href="../css/icomoon.css">
+  <title>Math lib</title>
+</head>
+
+<body>
+  <div class="icon-container">
+    <a href="../index.html"> <i class="icon-home"></i> </a>
+  </div>
+  <section id="title">Math lib</section>
+  <div id="container">
+    <!---->
+    <div id="container-title">
+      Explanation
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        The math lib allow us to have acces to vectors & matrices.
+        <br>
+        Also have some utils functions to manage it.
+        <br>
+        To use it, the only requirement is to have the headers and include mathlib.h.
+        <br>
+        We can acces to:
+      </div>
+      <pre>
+        <code class="language-cpp">
+namespace Math 
+{
+  class Vec2;
+  class Vec3;
+  class Vec4;
+  class Mat2;
+  class Mat3;
+  class Mat4;
+  class MathUtils;
+};
+			  </code>
+      </pre>
+      <div class="explanation">
+        Of course each class has its own properties but are made to be similar or equal
+      </div>
+    </div>
+    <!---->
+    <div id="container-title">
+      Functions
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        All the vectors share the same functions and the same for matrix clases.
+        <br>
+        The Vectors.
+      </div>
+      <pre>
+        <code class="language-cpp">
+class VecX
+{
+  // Console
+  ///////////////////////////////////////////////////////////////////////////
+  inline void print(unsigned d = 5, const char *name = "VecX") const 
+  { 
+    fprintf(stdout, "%s: %.*f, %.*f\n", name, d, this->x, d, this->y); // z & w if Vec3 or 4
+  }
+  
+  // This it to use with std strings and the operator <<
+  inline friend std::ostream &operator<<(std::ostream &os, VecX vec) 
+  { 
+    return (os << "(" << vec.x << ", " << vec.y << ")"); // z & w if Vec3 or 4
+  }
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Conversors
+  ///////////////////////////////////////////////////////////////////////////
+  // The array must be initialized by size of 2
+  inline void ToFloat(float *arr) const;
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Constructors
+  ///////////////////////////////////////////////////////////////////////////
+  inline VecX(float value = 0);
+  inline VecX(float x, float y); // z & w if Vec3 or 4
+  inline VecX(const float *values_array); // Need X values
+  inline VecX(const VecX &copy);
+  inline ~VecX();
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Operators
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Value
+  inline VecX operator+(float value) const;
+  inline VecX &operator+=(float value);
+
+  inline VecX operator-(float value) const;
+  inline VecX &operator-=(float value);
+
+  inline VecX operator*(float value) const;
+  inline VecX &operator*=(float value);
+
+  inline VecX operator/(float value) const;
+  inline VecX &operator/=(float value);
+
+  inline VecX operator-() const;
+
+  inline void operator=(float value);
+
+  inline bool operator==(float value) const;
+  inline bool operator!=(float value) const;
+
+  // Other
+  inline VecX operator+(VecX other) const;
+  inline VecX &operator+=(VecX other);
+
+  inline VecX operator-(VecX other) const;
+  inline VecX &operator-=(VecX other);
+
+  inline void operator=(VecX other);
+
+  inline bool operator==(VecX other) const;
+  inline bool operator!=(VecX other) const;
+
+  /*
+    In use with array make sure the first one is for the array number
+    and the second one is for the vector number
+  */
+  inline float operator[](size_t index) const;
+  inline float &operator[](size_t index);
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Static Methods
+  ///////////////////////////////////////////////////////////////////////////
+  inline static float Distance(VecX a, VecX b);
+
+  inline static float DotProduct(VecX a, VecX b);
+
+  inline static VecX Lerp(VecX a, VecX b, float t);
+  inline static VecX LerpUnclamped(VecX a, VecX b, float t);
+  inline static Vec3 CrossProduct(Vec3 a, Vec3 b); // Only for 3
+
+  inline static float Angle(VecX a, VecX b); // Only for 2 & 3
+  inline static VecX Reflect(VecX direction, VecX normal); // Only for 2 & 3
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Methods
+  ///////////////////////////////////////////////////////////////////////////
+  inline float Magnitude() const;
+
+  inline bool IsNormalized() const;
+  inline VecX Normalized() const;
+
+  inline float SqrMagnitude() const;
+  ///////////////////////////////////////////////////////////////////////////
+};
+			  </code>
+      </pre>
+      <div class="explanation">
+        And the Matrices. The order is the same for Mat3 or Mat4
+      </div>
+      <pre>
+        <code class="language-cpp">
+* Order:
+*  C0 C1
+*
+*  m0 m1   L0
+*  m2 m3   L1
+*
+
+class MatX
+{
+  // Console
+  ///////////////////////////////////////////////////////////////////////////
+  inline void print(unsigned d = 5, const char *name = "Mat2") const 
+  { 
+    fprintf(stdout, "%s:\n %.*f, %.*f\n %.*f, %.*f\n", name, d, this->m[0], d, this->m[1], d, this->m[2], d, this->m[3]); 
+  }
+
+  // This it to use with std strings and the operator <<
+  friend std::ostream &operator<<(std::ostream &os, Mat2 mat) 
+  { 
+    return (os << std::endl
+               << mat.m[0] << ", " << mat.m[1] << std::endl
+               << mat.m[2] << ", " << mat.m[3]); 
+  }
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Constructors
+  ///////////////////////////////////////////////////////////////////////////
+  inline MatX(float value = 0);
+  inline MatX(const float *a); // Need X * X values
+  inline MatX(const MatX &copy);
+  inline ~MatX();
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Operators
+  ///////////////////////////////////////////////////////////////////////////
+  inline void operator=(float value);
+  inline void operator=(const float *a); // Need X * X values
+  inline void operator=(MatX copy);
+
+  inline MatX operator+(MatX other) const;
+  inline MatX &operator+=(MatX other);
+
+  inline MatX operator+(float value) const;
+  inline MatX &operator+=(float value);
+
+  inline MatX operator-() const;
+  inline MatX operator-(MatX other) const;
+  inline MatX &operator-=(MatX other);
+
+  inline MatX operator-(float value) const;
+  inline MatX &operator-=(float value);
+
+  inline MatX operator*(MatX other) const;
+  inline MatX &operator*=(MatX other);
+
+  inline MatX operator*(float value) const;
+  inline MatX &operator*=(float value);
+
+  inline MatX operator/(float value) const;
+  inline MatX &operator/=(float value);
+
+  inline bool operator==(float value) const;
+  inline bool operator==(const float *a) const; // Need X * X values
+  inline bool operator==(MatX other) const;
+
+  inline bool operator!=(float value) const;
+  inline bool operator!=(const float *a) const; // Need X * X values
+  inline bool operator!=(MatX other) const;
+
+  /*
+    In use with array make sure the first one is for the array number
+    and the second one is for the vector number
+  */
+  inline float operator[](size_t index) const;
+  inline float &operator[](size_t index);
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Static methods
+  ///////////////////////////////////////////////////////////////////////////
+  inline static MatX Identity();
+  inline static float Determinant(const float *value); // Need X * X values
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Methods
+  ///////////////////////////////////////////////////////////////////////////
+  inline float Determinant() const;
+
+  inline VecX GetLine(size_t line) const;
+  inline VecX GetColumn(size_t column) const;
+
+  inline MatX Adjoint() const;
+
+  inline MatX Inverse() const;
+
+  inline MatX Transpose() const;
+  ///////////////////////////////////////////////////////////////////////////
+};
+			  </code>
+      </pre>
+      <div class="explanation">
+        Specific function for Mat3.
+      </div>
+      <pre>
+        <code class="language-cpp">
+class Mat3
+{
+  inline static Mat3 Translate(Vec2 position);
+  inline static Mat3 Translate(float x, float y);
+
+  inline static Mat3 Scale(Vec2 scale);
+  inline static Mat3 Scale(float x, float y);
+
+  inline static Mat3 Rotate(float rotation);
+
+  inline static Mat3 Transform(float rotation = 0, Vec2 scale = Vec2(1, 1), Vec2 translate = Vec2(0, 0));
+  inline static Mat3 Transform(float rotation = 0, float scaleX = 1, float scaleY = 1, float transX = 0, float transY = 0);
+};
+			  </code>
+      </pre>
+      <div class="explanation">
+        Specific function for Mat4.
+      </div>
+      <pre>
+        <code class="language-cpp">
+class Mat4
+{
+  inline static Mat4 Projection();
+
+  inline static Mat4 Translate(Vec3 distance);
+  inline static Mat4 Translate(float x, float y, float z);
+
+  inline static Mat4 Scale(Vec3 scale);
+  inline static Mat4 Scale(float x, float y, float z);
+
+  inline static Mat4 RotateX(float radians);
+  inline static Mat4 RotateY(float radians);
+  inline static Mat4 RotateZ(float radians);
+  inline static Mat4 Rotate(Vec3 radians);
+  inline static Mat4 Rotate(float radX, float radY, float radZ);
+
+  inline static Mat4 Transform(Vec3 rotation = Vec3::zero, Vec3 scale = Vec3::one, Vec3 translate = Vec3::zero);
+  inline static Mat4 Transform(float rotX = 0, float rotY = 0, float rotZ = 0,
+                               float scaleX = 1, float scaleY = 1, float scaleZ = 1,
+                               float transX = 0, float transY = 0, float transZ = 0);
+
+  inline static Mat4 ViewMatrix(Vec3 camara, Vec3 mira, Vec3 up);
+
+  inline static Mat4 PerspectiveMatrix(float fov, float aspect,
+                                       float near, float far);
+
+  inline static Mat4 OrthoMatrix(float right, float left,
+                                 float top, float bottom,
+                                 float near, float far);
+};
+			  </code>
+      </pre>
+    </div>
+    <!---->
+    <div id="container-title">
+      Utils
+      <hr>
+    </div>
+    <div class="subcontainer">
+      <div class="explanation">
+        I can Utils a class but there are only static functions.
+      </div>
+      <pre>
+        <code class="language-cpp">
+class MathUtils
+{
+  inline static bool MoreOrLessEqual(float n, float n1, float error = 1e-5f);
+  inline static float Sqrt(float n);
+
+  inline static float Clamp(float value, float minVal, float maxVal);
+
+  inline static Vec4 HomogenizeVec(Vec4 v);
+
+  inline static Vec3 Mat4TransformVec3(Mat4 m, Vec3 v);
+
+  inline static Vec2 Vec3ToVec2(Vec3 v);
+
+  inline static Vec3 Rotate3dPoint(Vec3 rot, Vec3 point);
+
+  inline static Vec3 OrbitPoint(Vec3 center, Vec3 orbit, Vec3 point);
+
+  inline static Vec3 Vec2ToVec3(Vec2 v2, bool standardised);
+
+  inline static Vec3 Mat3TransformVec3(Mat3 m, Vec3 v);
+
+  inline static void NormalizeVector(float v[3]);
+
+  inline static Vec3 CalculateTriangleNormal(const float v0[3], const float v1[3], const float v2[3]);
+
+  inline static Vec3 CalculateVertexNormal(const float n0[3], const float n1[3], const float n2[3], const float n3[3]);
+
+  inline static float AngleToRads(float angle);
+  inline static float RadsToAngle(float rads);
+
+  inline static Vec3 TrianglePlane(Vec3 p1, Vec3 p2, Vec3 p3);
+
+  inline static bool SegmentTriangle(Vec3 start, Vec3 end, Vec3 v0, Vec3 v1, Vec3 v2, Vec3 plane);
+
+  // This function alloc the vec2 array internally
+  inline static Vec2 *InitBasicCircle(size_t vertex, float diam, float rot, Vec2 trans);
+
+  inline static bool CircularCollision(Vec2 center1, float diam1, Vec2 center2, float diam2);
+  inline static bool SphericCollision(Vec3 center1, float diam1, Vec3 center2, float diam2);
+};
+			  </code>
+      </pre>
+    </div>
+    <!---->
+  </div>
+  <script src="js/prism.js"></script>
+</body>
+
+</html>
